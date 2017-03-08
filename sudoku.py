@@ -52,23 +52,22 @@ def check_table(table, x, y):
 
     return True
 
+def import_file():
+    Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
+    filename = askopenfilename()
+    print("open => " + filename)
 
+    file = open(filename, "r")
+    data = [[0 for x in range(9)] for y in range(9)]
+    temp = file.read().splitlines()
+    for i in range(0, 9):
+        data[i] = temp[i].split(",")
+    return data
 
-
-
-Tk().withdraw()  # we don't want a full GUI, so keep the root window from appearing
-filename = askopenfilename()
-print("open => " + filename)
-
-file = open(filename, "r")
-data = [[0 for x in range(9)] for y in range(9)]
-temp = file.read().splitlines()
-for i in range(0, 9):
-    data[i] = temp[i].split(",")
-print_table(data)
-for i in range(0, 9):
-    for j in range(0, 9):
-        print(str(i)+"+"+str(j),end=" => ")
-        print(check_table(data,i,i))
+# print_table(data)
+# for i in range(0, 9):
+#     for j in range(0, 9):
+#         print(str(i)+"+"+str(j),end=" => ")
+#         print(check_table(data,i,i))
 
 
