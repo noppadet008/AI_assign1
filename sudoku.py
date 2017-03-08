@@ -13,6 +13,22 @@ def print_table(table):
             print("- " * 12)
 
 
+def log_table(table,is_start):
+    if is_start:
+        file = open("log.txt", "w")
+    else :
+        file = open("log.txt", "a")
+    for i in range(0, 9):  # no. of row.
+        for j in range(0, 9):
+            file.write(table[i][j]+" ")
+            if (j + 1) % 3 == 0:
+                file.write("| ")
+        file.write("\n")
+        if (i + 1) % 3 == 0:
+            file.write("- " * 12 + "\n")
+    file.write("\n"+ "##" * 12 + "\n\n")
+
+
 def check_table(table, x, y):
     # check in block.
     collection_test = [True] * 9
