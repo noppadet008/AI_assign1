@@ -44,7 +44,7 @@ def check_table(table, x, y):
             else:
                 return False
 
-    # check in column.
+    # check in row.
     collection_test = [True] * 9
     for i in range(0, 9):
         num = int(table[y][i]) - 1
@@ -55,7 +55,7 @@ def check_table(table, x, y):
         else:
             return False
 
-    # check in row.
+    # check in column.
     collection_test = [True] * 9
     for i in range(0, 9):
         num = int(table[i][x]) - 1

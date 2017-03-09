@@ -1,6 +1,8 @@
 from sudoku import *
 from copy import copy, deepcopy
-
+import time
+start_time = time.time()
+tried = 0
 
 def counted(f):
     def wrapped(*args, **kwargs):
@@ -11,15 +13,19 @@ def counted(f):
 
 @counted
 def solving(position_x, position_y, table):
+    global tried
     for i in range(1, 10):
         clone_table = deepcopy(table)
         clone_table[position_y][position_x] = str(i)
-        print("edit position" + str(position_x) + "," + str(position_y) + "with value" + str(i))
+        print("edit position(" + str(position_x) + "," + str(position_y) + ") with value" + str(i))
+        tried += 1
         log_table(clone_table,False)
         if check_table(clone_table, position_x, position_y):
             temp_position = find_next(position_x, position_y, clone_table)
             print(temp_position)
             solving(temp_position[0], temp_position[1], clone_table)
+            print("back to ",end="")
+            print(temp_position)
 
 
 def find_next(position_x, position_y, table):
@@ -30,7 +36,9 @@ def find_next(position_x, position_y, table):
         if position_x == 0 and position_y == 9:
             print("done result\n\n")
             print_table(table)
-            print("call solve function "+str(solving.calls)+" time")
+            print("called function solving "+str(solving.calls)+" time")
+            print("try  "+str(tried)+" time")
+            print("using --- %s seconds ---" % (time.time() - start_time))
             quit()
         elif table[position_y][position_x] != "0":
             if position_x == 8:
